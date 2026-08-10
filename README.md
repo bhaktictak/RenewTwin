@@ -87,19 +87,25 @@ A digital twin consolidates multiple data streams (visual inspection, operationa
 ```
 
 ## Prototype Asset Health Index
-The Asset Health Index (AHI) is a synthetic metric calculated using weighted parameters:
-`AHI = 100 - (W1 * Visual_Defect_Penalty + W2 * Anomaly_Score_Penalty + W3 * Performance_Deviation)`
-- *Visual Defect Penalty*: Based on defect severity (hotspot > crack > inactive).
-- *Anomaly Score Penalty*: Normalized isolation forest anomaly score.
-- *Performance Deviation*: `|current_power - expected_power| / expected_power`.
+The Asset Health Index is a composite metric calculated using weighted parameters:
+
+```
+Health Score = 100 − (defect_probability × 40) − (anomaly_score × 30)
+                   − (performance_deviation × 20) − (temperature_penalty × 10)
+```
+
+- **Visual Defect Penalty (40%)**: Based on AI-predicted defect probability.
+- **Anomaly Score Penalty (30%)**: Normalized Isolation Forest anomaly score from operational data.
+- **Performance Deviation (20%)**: `max(0, (expected_power − current_power) / expected_power)`, capped at 1.0.
+- **Temperature Penalty (10%)**: Linear penalty for temperatures above 55°C, maxing at 85°C.
 
 **Risk Thresholds:**
-- **HEALTHY**: 85 - 100
-- **MONITOR**: 70 - 84
-- **AT_RISK**: 50 - 69
-- **CRITICAL**: < 50
+- **HEALTHY**: 90 – 100
+- **MONITOR**: 75 – 89
+- **AT RISK**: 50 – 74
+- **CRITICAL**: 0 – 49
 
-*Note: This formula and the associated weights are designed for prototype demonstration and require calibration against historical maintenance data.*
+*Note: This is a Prototype Asset Health Index. Weights are informed by domain literature but require calibration against historical maintenance data for production use.*
 
 ## Maintenance Prioritization
 Assets are ranked based on a combination of their Risk Level (CRITICAL > AT_RISK > MONITOR) and their capacity impact (rated capacity * performance deviation). Assets requiring immediate attention due to severe visual defects or critical telemetry anomalies are prioritized highest.
@@ -166,11 +172,13 @@ npm run dev
 
 | Method | Path | Description |
 | :--- | :--- | :--- |
-| `GET` | `/api/assets` | Retrieve list of all renewable energy assets and current status. |
-| `GET` | `/api/assets/{asset_id}` | Retrieve detailed digital twin state for a specific asset. |
-| `POST` | `/api/analyze/visual` | Submit asset image for ResNet-18 defect classification. |
-| `POST` | `/api/analyze/telemetry` | Submit operational data for Isolation Forest anomaly detection. |
-| `GET` | `/api/maintenance/schedule` | Retrieve prioritized list of recommended maintenance actions. |
+| `GET` | `/assets` | Retrieve list of all renewable energy assets and current status. |
+| `GET` | `/assets/{asset_id}` | Retrieve detailed asset information. |
+| `GET` | `/assets/{asset_id}/digital-twin` | Retrieve full digital twin state for a specific asset. |
+| `GET` | `/dashboard/summary` | Retrieve fleet-wide KPIs (counts, avg health, maintenance pending). |
+| `GET` | `/dashboard/maintenance/priorities` | Retrieve prioritized list of recommended maintenance actions. |
+| `POST` | `/predict` | Submit asset image for defect classification (demo inference). |
+| `GET` | `/health` | API health check. |
 
 ## Model Results
 *Results reported on synthetic demo data. Not representative of production performance. Included to demonstrate pipeline functionality.*
