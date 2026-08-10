@@ -1,0 +1,76 @@
+.sidebar-list-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.empty-state {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-style: italic;
+}
+
+.sidebar-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sidebar-list-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-id {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--accent);
+}
+
+.item-details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.item-defect {
+  color: var(--text);
+}
+
+.priority-item {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.priority-number {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-top: 0.125rem;
+}
+
+.priority-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.action-text {
+  font-size: 0.8125rem;
+  color: var(--text);
+  line-height: 1.4;
+}

@@ -1,0 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+venv/
+env/
+.venv/
+*.whl
+
+# Node
+node_modules/
+frontend/node_modules/
+frontend/dist/
+.next/
+
+# Data artifacts
+data/raw/
+data/processed/
+ml/data/
+ml/models/*.pth
+ml/models/*.pt
+ml/models/*.onnx
+*.h5
+*.hdf5
+*.pkl
+*.joblib
+
+# Environment
+.env
+.env.local
+.env.production
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Database
+*.db
+*.sqlite3
+
+# Logs
+*.log
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Misc
+*.csv
+*.zip
+*.tar.gz

@@ -1,0 +1,25 @@
+.asset-table-wrapper {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.asset-table-wrapper table {
+  width: 100%;
+}
+
+.asset-table-wrapper th {
+  position: sticky;
+  top: 0;
+  background-color: var(--surface);
+  z-index: 10;
+}
+
+.clickable-row {
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.asset-id-col {
+  font-weight: 600;
+  color: var(--accent);
+}
